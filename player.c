@@ -3,8 +3,6 @@
 #include "player.h"
 
 void drawPlayer(WINDOW *win,Player *p) {
-	wclear(win);
-	box(win, 0, 0);
 	mvwaddch(win,p->y,p->x,p->ch);
 }
 void updatePlayer(int i, Player *p) {

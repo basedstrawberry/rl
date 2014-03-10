@@ -12,8 +12,6 @@ int main() {
 
 	int input;
 	PLAYING = TRUE;
-	FILE *log = fopen("/home/michael/projects/rl/log", "w");	
-	assert(log != NULL);
 	Player *player = malloc(sizeof(Player));
 	player->x = 5;
 	player->y = 5;
@@ -28,9 +26,7 @@ int main() {
 	WINDOW *msgwin = create_newwin(6,80,18,0);
 	WINDOW *statwin = create_newwin(18,20,0,60);
 	WINDOW *gamewin = create_newwin(18,60,0,0);
-	fprintf(log, "Generating Map...\n");
 	Map *lvlone = generateMap();
-	fprintf(log, "Made it past map generation\n");
 	msg_array[0] = " ";
 	msg_array[1] = " ";
 	msg_array[2] = " ";
@@ -38,6 +34,9 @@ int main() {
 	msg_push("Welcome to rl!");
 	do {
 		// DRAW
+		wclear(gamewin);
+		box(gamewin, 0, 0);
+		drawMap(gamewin, lvlone);
 		drawPlayer(gamewin, player);
 		msg_print(msgwin);
 		stats_print(statwin, player);
@@ -63,7 +62,6 @@ int main() {
 	destroy_win(msgwin);
 	// destroy curses
 	endwin();
-	fclose(log);
 	free(player);
 	return 0;
 
