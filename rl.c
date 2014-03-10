@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "rl.h"
 #include "msg.h"
+#include "map.h"
 #include "player.h"
 
 
@@ -20,16 +21,16 @@ int main() {
 	cbreak();
 	noecho();
 	refresh();
+	curs_set(0);
 	// initialize game 
 	WINDOW *msgwin = create_newwin(6,80,18,0);
 	WINDOW *statwin = create_newwin(18,20,0,60);
 	WINDOW *gamewin = create_newwin(18,60,0,0);
-
 	msg_array[0] = " ";
 	msg_array[1] = " ";
 	msg_array[2] = " ";
 	msg_array[3] = " ";
-	msg_push("Welcome!!");
+	msg_push("Welcome to rl!");
 	do {
 		// DRAW
 		drawPlayer(gamewin, player);
@@ -72,7 +73,6 @@ int takeInput() {
 		case 113:
 			PLAYING = FALSE;
 			break;
-
 	}
 	return i;
 }
