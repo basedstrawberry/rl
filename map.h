@@ -9,17 +9,22 @@ typedef struct {
 	char ch;
 	bool walk;
 	int warp;
-	int x;
-	int y;
 } Tile;
 
 typedef struct Map {
 	Tile grid[16*58+1];
 } Map;
+
+typedef struct {
+	Map *floor[10];
+	char *name;
+} Dungeon;
 /////////////////
 Tile newTile(Tile_t type);
 Map *generateMap();
+Dungeon *generateDungeon();
 void drawMap();
 void destroyMap(Map *m);
+void destroyDungeon(Dungeon *d);
 #endif
 

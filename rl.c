@@ -12,10 +12,8 @@ int main() {
 
 	int input;
 	PLAYING = TRUE;
-	Player *player = malloc(sizeof(Player));
-	player->x = 5;
-	player->y = 5;
-	player->ch = 64;
+	int LEVEL = 0;
+	Player *player = initPlayer("Michael");
 	// initialize curses	
 	initscr();
 	cbreak();
@@ -26,7 +24,12 @@ int main() {
 	WINDOW *msgwin = create_newwin(6,80,18,0);
 	WINDOW *statwin = create_newwin(18,20,0,60);
 	WINDOW *gamewin = create_newwin(18,60,0,0);
-	Map *lvlone = generateMap();
+
+
+
+	Dungeon *dungeon = generateDungeon();
+
+
 	msg_array[0] = " ";
 	msg_array[1] = " ";
 	msg_array[2] = " ";
@@ -36,7 +39,7 @@ int main() {
 		// DRAW
 		wclear(gamewin);
 		box(gamewin, 0, 0);
-		drawMap(gamewin, lvlone);
+		drawMap(gamewin, dungeon->floor[LEVEL]);
 		drawPlayer(gamewin, player);
 		msg_print(msgwin);
 		stats_print(statwin, player);
@@ -49,14 +52,14 @@ int main() {
 		wrefresh(gamewin);
 		// UPDATE
 		input = takeInput();
-		updatePlayer(input, player);
+		updatePlayer(input, player, dungeon->floor[LEVEL]);
 
 		
 	} while(PLAYING);
 
 
 	// destroy game
-	destroyMap(lvlone);
+	destroyDungeon(dungeon);
 	destroy_win(gamewin);
 	destroy_win(statwin);
 	destroy_win(msgwin);
