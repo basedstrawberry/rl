@@ -5,7 +5,11 @@ typedef struct {
 	char *name;
 	int x;
 	int y;
+	int fov;
 	char ch;
+	int att;
+	int def;
+	int dex;
 } Player;
 
 Player *initPlayer(char *name);

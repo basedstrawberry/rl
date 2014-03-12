@@ -4,7 +4,7 @@ all: rl
 
 
 rl: rl.o player.o msg.o map.o 
-	gcc rl.o player.o map.o msg.o -lncurses -o rl
+	gcc rl.o player.o map.o msg.o -lm -lncurses -o rl
 
 rl.o: rl.c rl.h
 	gcc $(CFLAGS) rl.c

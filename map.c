@@ -7,6 +7,7 @@ Tile newTile(Tile_t type) {
 	Tile new_tile;
 	new_tile.ch = 46;
 	new_tile.walk = TRUE;
+	new_tile.visible = FALSE;
 	new_tile.warp = -1;
 	switch(type) {
 		case GROUND:
@@ -68,7 +69,9 @@ void drawMap(WINDOW *win, Map *m) {
 	int y;
 	for(y=0;y<=15;y++) {
 		for(x=0;x<=57;x++) {
-			mvwaddch(win,y+1,x+1,m->grid[(y*58)+x].ch);
+			if(m->grid[y*58+x].visible) {
+				mvwaddch(win,y+1,x+1,m->grid[y*58+x].ch);
+			}
 		}
 	}
 }

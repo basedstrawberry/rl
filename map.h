@@ -8,6 +8,7 @@ typedef enum {
 typedef struct {
 	char ch;
 	bool walk;
+	bool visible;
 	int warp;
 } Tile;
 
